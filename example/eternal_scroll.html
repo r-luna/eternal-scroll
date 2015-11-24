@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <script type="text/javascript" src="eternal_scroll.js"></script>
+        <link rel="stylesheet" type="text/css" href="example.css">
+        <script type="text/javascript">
+            
+            var _scrollObj = null;
+            
+            /* this returns the data with which to populate the scroll content area */
+            function getData(start,end){
+                var start = start < 0 ? 0 : start || 0;
+                var end = end || (start + 16);
+                console.log('range: ' + start + ' - ' + end);
+                document.getElementById('range').innerHTML = 'range: ' + start + ' - ' + end;
+                var content = '';
+                for (var i=start;i<end;i++){
+                    // a simple string of text.....
+                    content += '<div data-num="' + i + '" class="row' + (i%2===0?1:2) + '">' + i + '</div>';
+                }
+                return content;
+            }
+
+
+            ;(function(){
+                document.addEventListener('DOMContentLoaded',function(e){
+                    var preScrollBuffer = 10;
+                    var postScrollBuffer = 10;
+                    _scrollObj = new EternalScroll();
+                    _scrollObj.init('wrapper',getData,preScrollBuffer,postScrollBuffer);
+                },false);
+            })();
+        </script>
+    </head>
+    <body>
+        <div id="range"></div>
+        <div id="wrapper" style="border: 2px solid #fe0;position:absolute;top:25px;left:25px;bottom:25px;right:25px;overflow:scroll;">
+            <div id="content"></div>
+        </div>
+        
+    </body>
+</html>

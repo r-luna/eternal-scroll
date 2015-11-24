@@ -1,0 +1,33 @@
+{
+  "name": "infinite_scroll",
+  "version": "0.0.0",
+  "description": "Similar to Infinite Scroll, Eternal Scroll can display a list of elements while scrolling in an \"infinit\" manner.",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/r-luna/eternal-scroll"
+  },
+  "keywords": [
+    "infinite",
+    "scroll"
+  ],
+  "author": "Rick Luna",
+  "license": "GPL 2",
+  "bugs": {
+    "url": "https://github.com/r-luna/eternal-scroll/issues"
+  },
+  "homepage": "https://github.com/r-luna/eternal-scroll",
+  "devDependencies": {
+    "gulp": "~3.9.0",
+    "gulp-uglify": "~1.5.1",
+    "jshint": "~2.9.1-rc1",
+    "gulp-jshint": "~2.0.0",
+    "jshint-stylish": "~2.1.0"
+  }
+}
