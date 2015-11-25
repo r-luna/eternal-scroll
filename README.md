@@ -6,8 +6,5 @@ As Eternal Scroll relies on native behavior for scrolling the behavior you will 
 
 Eternal Scroll pays attention to the scroll bar in so far as while it swaps out content it does so in a way to ensure that the scroll bar is always the correct size and in the correct position relative to where the content would naturaly be if it was all in the DOM. In other words, imagine a list consisting of 2000 rows. Scroll mid-way and the scroll bar is... well in the middle - and, all of the non-visible rows are still in the DOM. Now imagine the exact same thing with Eternal Scroll - the scroll bar is the exact same size and at the same position but without 2000 elements in the DOM.
 
-This is a work-in-progress, meant for use on mobie devices where controling DOM bloat is paramount. Nothing stops you though from using it elsewhere.
+This is a work-in-progress, meant for use on mobie devices where controlling DOM bloat is paramount.
 
-# How it Works
-
-[to do]
