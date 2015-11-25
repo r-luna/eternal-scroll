@@ -10,4 +10,4 @@ This is a work-in-progress, meant for use on mobie devices where controling DOM 
 
 # How it Works
 
-Eternal Scroll in a nutshell is at this poitn in time a 
+[to do]
