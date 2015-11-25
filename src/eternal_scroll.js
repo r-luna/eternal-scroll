@@ -64,6 +64,7 @@ var EternalScroll = function(){
 
     function _detectScrollStop(){
         if (that.wrapperEl.scrollTop === scrollPos){
+            var obj = {target:that.wrapperEl};
             timer = null;
             onScrollStop && (onScrollStop())
         }
@@ -86,9 +87,6 @@ var EternalScroll = function(){
         that.rowHeight = that.contentEl.firstChild.offsetHeight;
         that.rowsPerWindow = Math.ceil(that.wrapperElHeight / that.rowHeight);
         that.wrapperEl.addEventListener('scroll',_updateWhenScrolling,false);
-        window.addEventListener('scrollend',function(e){
-            console.log('stopped',e);   
-        },false);
     };
 };
 
