@@ -25,6 +25,10 @@
                 }
                 return content;
             }
+            
+            function scrollingHasStopped(){
+                console.log('Scrolliing Has Stopped');
+            }
 
 
             ;(function(){
@@ -32,7 +36,7 @@
                     var preScrollBuffer = 10;
                     var postScrollBuffer = 10;
                     _scrollObj = new EternalScroll();
-                    _scrollObj.init('wrapper',getData,preScrollBuffer,postScrollBuffer);
+                    _scrollObj.init('wrapper',getData,scrollingHasStopped,preScrollBuffer,postScrollBuffer);
                 },false);
             })();
         </script>

@@ -20,6 +20,7 @@ var EternalScroll = function(){
     var that = this;
     var timer = null;
     var scrollPos = 0; // scrollTop of wrapping element
+    var onScrollStop = null;
     this.wrapperEl = null; // the overall wrapping element
     this.wrapperElHeight = null; // height of the overall wrapping element
     this.contentEl = null; // the content wrapper
@@ -64,6 +65,7 @@ var EternalScroll = function(){
     function _detectScrollStop(){
         if (that.wrapperEl.scrollTop === scrollPos){
             timer = null;
+            onScrollStop && (onScrollStop())
         }
     }
     this.destroy = function(){
@@ -72,7 +74,8 @@ var EternalScroll = function(){
     };
 
     /* init scrolling */
-    this.init = function(wid,dataFuncRef,preScrollBuffer,postScrollBuffer){
+    this.init = function(wid,dataFuncRef,scrollStopFuncRef,preScrollBuffer,postScrollBuffer){
+        onScrollStop = scrollStopFuncRef || null;
         that.preScrollBuffer = preScrollBuffer;
         that.postScrollBuffer = postScrollBuffer;
         that.dataFuncRef = dataFuncRef;
@@ -85,7 +88,7 @@ var EternalScroll = function(){
         that.wrapperEl.addEventListener('scroll',_updateWhenScrolling,false);
         window.addEventListener('scrollend',function(e){
             console.log('stopped',e);   
-        },false);:
+        },false);
     };
 };
 
