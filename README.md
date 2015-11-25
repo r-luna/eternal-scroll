@@ -8,3 +8,7 @@ Eternal Scroll pays attention to the scroll bar in so far as while it swaps out 
 
 This is a work-in-progress, meant for use on mobie devices where controlling DOM bloat is paramount.
 
+# Methods
+
+
+
