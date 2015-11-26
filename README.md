@@ -34,7 +34,7 @@ function scrollEnd(e){
 var myScrollingDiv = new EternalScroll();
 
 // init the instance
-    myScrollingDiv.init('wrapperDivID,returnData,scrollEnd);      
+    myScrollingDiv.init('wrapperDivID',returnData,scrollEnd);      
 ```
 
 
