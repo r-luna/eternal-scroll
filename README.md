@@ -10,5 +10,41 @@ This is a work-in-progress, meant for use on mobie devices where controlling DOM
 
 # Methods
 
+**init()**
+
+Initiate the Eternal Scroll instance. Currently accepts the following params:
+ * Wrapper Id
+ * "Get Data" function reference
+ * Scroll End callback
+ 
+ 
+ For example:
+ 
+```
+function returnData(start,end){
+    // return data to Eternal scroll
+}
+
+function scrollEnd(e){
+    console.log(e);
+}
+var myScrollingDiv = new EternalScroll();
+    myScrollingDiv.init('wrapperDivID,returnData,scrollEnd);      
+```
 
 
+**destroy()**
+
+Unregisters event listners and renders the Eternal Scroll instance inert.
+
+```
+myscrollingDiv.destroy()
+```
+
+**Callbacks**
+
+Eternal Scroll currently has one callback for 'onScrollEnd'. An example of the returned event object:
+
+```
+{target: [DOM element reference]}
+```
