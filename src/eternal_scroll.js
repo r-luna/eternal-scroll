@@ -64,9 +64,9 @@ var EternalScroll = function(){
 
     function _detectScrollStop(){
         if (that.wrapperEl.scrollTop === scrollPos){
-            var obj = {target:that.wrapperEl};
+            var obj = {target:that.wrapperEl,scrollposition: scrollPos};
             timer = null;
-            onScrollStop && (onScrollStop())
+            onScrollStop && (onScrollStop(obj))
         }
     }
     this.destroy = function(){
