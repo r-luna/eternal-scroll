@@ -15,29 +15,34 @@ This is a work-in-progress, meant for use on mobie devices where controlling DOM
 Initiate the Eternal Scroll instance. Currently accepts the following params:
  * Wrapper Id
  * "Get Data" function reference
- * Scroll End callback
+ * "Scroll End" callback
  
  
  For example:
  
-```
+```javascript
 function returnData(start,end){
-    // return data to Eternal scroll
+    // return data to Eternal Scroll
 }
 
 function scrollEnd(e){
+    // your scroll end callback
     console.log(e);
 }
+
+// create a new Eternal Scroll instance
 var myScrollingDiv = new EternalScroll();
+
+// init the instance
     myScrollingDiv.init('wrapperDivID,returnData,scrollEnd);      
 ```
 
 
 **destroy()**
 
-Unregisters event listners and renders the Eternal Scroll instance inert.
+Unregisters event listeners and renders the Eternal Scroll instance inert.
 
-```
+```javascript
 myscrollingDiv.destroy()
 ```
 
@@ -45,6 +50,6 @@ myscrollingDiv.destroy()
 
 Eternal Scroll currently has one callback for 'onScrollEnd'. An example of the returned event object:
 
-```
+```javascript
 {target: [DOM element reference]}
 ```
