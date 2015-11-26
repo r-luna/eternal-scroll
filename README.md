@@ -8,14 +8,30 @@ Eternal Scroll pays attention to the scroll bar in so far as while it swaps out 
 
 This is a work-in-progress, meant for use on mobie devices where controlling DOM bloat is paramount.
 
+# To Do
+
+* auto insert or wrap content so you dont have to suppy an empty DIV of your own within the wrapper
+* detecct the overlfow of the wrapper and set it if it is missing
+* Horizontal Scrolling
+
+# Setup
+
+Eternal Scroll will eventually do some of the mundane things for you - but at this point requires the following:
+
+* A wrapper DIV whose css overflow property is set to enable scrolling
+* The wrapper DIV needs a selector ID
+* An empty DIV must reside within the wrapper (Eternal Scroll will take care of this in the near future)
+* Your "Data Function" must currently return a string of concatenated HTML - based on the start and end values sent to it (the later is optional)
+* Each "row" or "item" in your list must contain a data-num attribute that represents its order in the list of data
+
 # Methods
 
 **init()**
 
 Initiate the Eternal Scroll instance. Currently accepts the following params:
- * Wrapper Id
- * "Get Data" function reference
- * "Scroll End" callback
+* Wrapper Id
+* "Get Data" function reference
+* "Scroll End" callback
  
  
  For example:
