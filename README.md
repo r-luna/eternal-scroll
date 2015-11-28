@@ -24,39 +24,38 @@ Eternal Scroll will eventually do some of the mundane things for you - but at th
 * Your "Data Function" must currently return a string of concatenated HTML - based on the start and end values sent to it (the later is optional)
 * Each "row" in your list must contain a data-num attribute that represents its order in the list of data
 
+***REQUIRED:
+
+You must create your own "data function" that returns a string of html or an array of element objects to be used as content. You pass a reference of this fucntion into Eternal Scroll via the config object used to init Eternal Scroll.
+
+The function that you create will be sent 3 numbers from Eternal Scroll: startnumber, number of rows, buffer number. From these three numberrs you should be able to construct a function that returns the correct content data.
+
+See the example.....
+
 # Methods
 
 **init()**
 
-Initiate the Eternal Scroll instance. Currently accepts the following params:
-* Wrapper Id
-* "Get Data" function reference
-* "Scroll End" callback
-
+Initiate the Eternal Scroll instance by passing in a configuration object.
 
 For example:
- 
+
 ```javascript
-function returnData(start,end){
-    // return data to Eternal Scroll
-}
-
-function scrollEnd(e){
-    // your scroll end callback
-    console.log(e);
-}
-
 // create a new Eternal Scroll instance
 var myScrollingDiv = new EternalScroll();
 
 // init the instance
-    myScrollingDiv.init('wrapperDivID',returnData,scrollEnd);      
+    myScrollingDiv.init({
+        wid:'verticalScroll', // id of the wrapper element
+        datafunc: returnContentData, // your data function
+        onscrollend: yourScrollEndCallBack, // your cb for the scroll end event
+        buffer: 15 // buffer of rows to append to the end of the list
+    });
 ```
-
 
 **destroy()**
 
-Unregisters event listeners and renders the Eternal Scroll instance inert.
+Unregisters event listeners.
 
 ```javascript
 myscrollingDiv.destroy()
@@ -66,8 +65,8 @@ myscrollingDiv.destroy()
 
 **onScrollEnd**
 
-Eternal Scroll currently has one callback for 'onScrollEnd'. An example of the returned event object:
+Eternal Scroll currently has a callback for an "onScrollEnd event" that is set when you init the instance. An example of the returned event object:
 
 ```javascript
-{target: [DOM element reference],scrollposition: [number]}
+{target: 'DOM element reference',scrollposition: number}
 ```
