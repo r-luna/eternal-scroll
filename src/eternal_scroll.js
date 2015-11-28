@@ -20,20 +20,29 @@ var EternalScroll = function(){
     var that = this;
     var timer = null;
     var scrollPos = 0; // scrollTop of wrapping element
-    var onScrollStop = null;
+    var onScrollEnd = null;
+    var buffer = null;
+    var dataFuncRef = null; // function reference to the func that populates the content area
+    var rowsPerWindow = null; // number of rows that can fit in each window
+    var rowHeight = null; // height of each row
     this.wrapperEl = null; // the overall wrapping element
     this.wrapperElHeight = null; // height of the overall wrapping element
     this.contentEl = null; // the content wrapper
-    this.dataFuncRef = null; // function reference to the func that populates the content area
-    this.rowHeight = null; // height of each row
-    this.rowsPerWindow = null; // number of rows that can fit in each window
-    this.preScrollBuffer = null;
-    this.postScrollBuffer = null;
-    
 
     /* populate content */
-    function _populate(startNum){
-        that.contentEl.innerHTML = that.dataFuncRef(startNum);
+    function _populate(startNum,rowQuan,buffer){
+        var startNum = startNum || 0;
+        var rowQuan = rowQuan || null;
+        var buffer = buffer || null;
+        var content = dataFuncRef(startNum,rowQuan,buffer);
+        if (typeof content === 'string'){
+            that.contentEl.innerHTML = content;
+        } else if (typeof content === 'object' && content.length){
+            that.contentEl.innerHTML = '';
+            for (var i=0;i<content.length;i++){
+                that.contentEl.appendChild(content[i]);
+            }
+        }
     }
 
     /* update position of content wrapper and update the content wrapper height */
@@ -43,19 +52,18 @@ var EternalScroll = function(){
         var lastEl = that.contentEl.lastChild;
         var lastElRect = lastEl.getBoundingClientRect();
         var startNumber = null;
-        
         // has the last el moved within the bottom of the wrapper?
         if (lastElRect.top < that.wrapperElHeight){
-            startNumber = +(lastEl.getAttribute('data-num')) - that.rowsPerWindow; // determine where new spread of rows starts
-            _populate(startNumber);
-            that.contentEl.style.marginTop = Math.ceil(startNumber * that.rowHeight) + 'px'; // position the content wrapper (not the overall wrapper)
+            startNumber = +(lastEl.getAttribute('data-num')) - rowsPerWindow; // determine where new spread of rows starts
+            _populate(startNumber,rowsPerWindow,buffer);
+            that.contentEl.style.marginTop = Math.ceil(startNumber * rowHeight) + 'px'; // position the content wrapper (not the overall wrapper)
         }
         // has the first el moved within the top of the wrapper?
         if (firstElRect.top > that.wrapperEl.getBoundingClientRect().top){
-            startNumber = +(firstEl.getAttribute('data-num')) - that.rowsPerWindow; // determine where new spread of rows starts
+            startNumber = +(firstEl.getAttribute('data-num')) - rowsPerWindow; // determine where new spread of rows starts
             startNumber = startNumber < 0 ? 0 : startNumber;
-            _populate(startNumber);
-            that.contentEl.style.marginTop = ~~(startNumber * that.rowHeight) + 'px'; // position the content wrapper (not the overall wrapper)
+            _populate(startNumber,rowsPerWindow,buffer);
+            that.contentEl.style.marginTop = ~~(startNumber * rowHeight) + 'px'; // position the content wrapper (not the overall wrapper)
         }
         scrollPos = e.target.scrollTop;
         window.clearTimeout(timer);
@@ -66,7 +74,7 @@ var EternalScroll = function(){
         if (that.wrapperEl.scrollTop === scrollPos){
             var obj = {target:that.wrapperEl,scrollposition: scrollPos};
             timer = null;
-            onScrollStop && (onScrollStop(obj))
+            onScrollEnd && (onScrollEnd(obj))
         }
     }
     this.destroy = function(){
@@ -75,17 +83,20 @@ var EternalScroll = function(){
     };
 
     /* init scrolling */
-    this.init = function(wid,dataFuncRef,scrollStopFuncRef,preScrollBuffer,postScrollBuffer){
-        onScrollStop = scrollStopFuncRef || null;
-        that.preScrollBuffer = preScrollBuffer;
-        that.postScrollBuffer = postScrollBuffer;
-        that.dataFuncRef = dataFuncRef;
-        that.wrapperEl = document.getElementById(wid);
+    this.init = function(o){
+        onScrollEnd = o.onscrollend || null;
+        buffer = o.buffer || null;
+        dataFuncRef = o.datafunc || null;
+        if (!o.wid){
+            console.log('wrapper ID is required');
+            return;
+        }
+        that.wrapperEl = document.getElementById(o.wid);
         that.contentEl = that.wrapperEl.children[0];
-        _populate(0);
+        _populate(0,20,buffer);
         that.wrapperElHeight = that.wrapperEl.offsetHeight;
-        that.rowHeight = that.contentEl.firstChild.offsetHeight;
-        that.rowsPerWindow = Math.ceil(that.wrapperElHeight / that.rowHeight);
+        rowHeight = that.contentEl.firstChild.offsetHeight;
+        rowsPerWindow = Math.ceil(that.wrapperElHeight / rowHeight);
         that.wrapperEl.addEventListener('scroll',_updateWhenScrolling,false);
     };
 };

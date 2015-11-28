@@ -35,3 +35,12 @@
     background-color: #fff;
     padding: 8px;
 }
+#verticalScroll {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    bottom:15px;
+    left: 15px;
+    border: 2px solid #ed2;
+    overflow: auto;
+}

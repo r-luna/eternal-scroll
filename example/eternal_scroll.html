@@ -12,11 +12,9 @@
             
             var _scrollObj = null;
             
-            /* this returns the data with which to populate the scroll content area */
-            function getData(start,end){
-                var start = start < 0 ? 0 : start || 0;
-                var end = end || (start + 16);
-                console.log('range: ' + start + ' - ' + end);
+            /* this returns string data */
+            function returnElementsAsString(start,rowQuan,buffer){
+                var end = start + rowQuan + buffer;
                 document.getElementById('range').innerHTML = 'range: ' + start + ' - ' + end;
                 var content = '';
                 for (var i=start;i<end;i++){
@@ -26,8 +24,25 @@
                 return content;
             }
             
+            /* this returns an array of elements */
+            function returnElementsAsDomObjects(start,rowQuan,buffer){
+                var end = start + rowQuan + buffer;
+                var content = [];
+                var temp = null;
+                for (var i=start;i<end;i++){
+                    temp = document.createElement('DIV')
+                    temp.setAttribute('data-num',i);
+                    temp.setAttribute('class','row' + (i%2===0?1:2));
+                    temp.innerHTML = i;
+                    content.push(temp);
+                    temp = null;
+                }
+                return content;
+            }
+            
             function scrollingHasStopped(e){
-                console.log('Scrolling Has Stopped',e);
+                console.log('Scrolling Has Stopped');
+                console.log(e);
             }
 
 
@@ -36,15 +51,20 @@
                     var preScrollBuffer = 10;
                     var postScrollBuffer = 10;
                     _scrollObj = new EternalScroll();
-                    _scrollObj.init('wrapper',getData,scrollingHasStopped,preScrollBuffer,postScrollBuffer);
+                    _scrollObj.init({
+                        wid:'verticalScroll',
+                        datafunc: returnElementsAsDomObjects,
+                        onscrollend: scrollingHasStopped,
+                        buffer: 15 
+                    });
                 },false);
             })();
         </script>
     </head>
     <body>
         <div id="range"></div>
-        <div id="wrapper" style="border: 2px solid #fe0;position:absolute;top:25px;left:25px;bottom:25px;right:25px;overflow:scroll;">
-            <div id="content"></div>
+        <div id="verticalScroll">
+            <div></div>
         </div>
         
     </body>

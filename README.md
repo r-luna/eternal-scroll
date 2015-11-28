@@ -62,7 +62,9 @@ Unregisters event listeners and renders the Eternal Scroll instance inert.
 myscrollingDiv.destroy()
 ```
 
-**Callbacks**
+#Callbacks
+
+**onScrollEnd**
 
 Eternal Scroll currently has one callback for 'onScrollEnd'. An example of the returned event object:
 
