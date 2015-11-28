@@ -21,16 +21,17 @@ Eternal Scroll will eventually do some of the mundane things for you - but at th
 * A wrapper DIV whose css overflow property is set to enable scrolling
 * The wrapper DIV needs a selector ID
 * An empty DIV must reside within the wrapper (Eternal Scroll will take care of this in the near future)
-* Your "Data Function" must currently return a string of concatenated HTML - based on the start and end values sent to it (the later is optional)
-* Each "row" in your list must contain a data-num attribute that represents its order in the list of data
+* Your "Data Function" (see below)
 
-***REQUIRED:
+About the "Data Function":
 
-You must create your own "data function" that returns a string of html or an array of element objects to be used as content. You pass a reference of this fucntion into Eternal Scroll via the config object used to init Eternal Scroll.
+You must create a "data function" that returns a string of html or an array of element objects to be used as content. You pass a reference of this function into Eternal Scroll via the config object used to init the instance.
 
 The function that you create will be sent 3 numbers from Eternal Scroll: startnumber, number of rows, buffer number. From these three numberrs you should be able to construct a function that returns the correct content data.
 
-See the example.....
+Each "row" in your list must contain a data-num attribute that represents its order in the list of data.
+
+See the examples.
 
 # Methods
 
