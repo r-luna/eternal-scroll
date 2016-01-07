@@ -1,5 +1,7 @@
 # eternal-scroll
 
+(Project started as a challenge to see what it would take to do endless scrolling.)
+
 Where most "infinite/endless" scrolling libraries aim to replace native scrolling with JavaScript-based scrolling/animation Eternal Scroll really only cares about managing DOM bloat within overlfow:auto'd elements and thus relies on native features to do all scrolling.
 
 As Eternal Scroll relies on native behavior for scrolling the behavior you will see should be very predictable. On desktop there wont be any inertia while on mobile devices you will certainly see the native scrolling (inertia) behavior. As well you will see the default scroll bars on both desktop and mobile devices. Obviously on desktop the scrollwheel will work.
@@ -10,9 +12,10 @@ This is a work-in-progress, meant for use on mobile devices where controlling DO
 
 # To Do
 
-* auto insert or wrap content so you dont have to supply an empty DIV of your own within the wrapper
-* detect the overlfow of the wrapper and set it if it is missing
+* Auto insert or wrap content so you dont have to supply an empty DIV of your own within the wrapper
+* Detect the overlfow of the wrapper and set it if it is missing
 * Horizontal Scrolling
+* Recycle DOM elements
 
 # Setup
 
